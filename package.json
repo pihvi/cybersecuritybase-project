@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "npm install && node index.js"
+  },
+  "dependencies": {
+    "express": "4.4.0",
+    "express-session": "1.15.6"
+  }
+}
