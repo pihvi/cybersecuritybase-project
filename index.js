@@ -9,7 +9,7 @@ app.use(session({
 
 app.get('/', (req, res) => {
   if (req.session.user) {
-    res.send('<img src="/logo.png">Hello ' + req.session.user + '<h3>messages</h3>' + messages.join('<br>') + '<form action="/msg"><input name="msg" placeholder="new message"><input type="submit"></form>' + '<h4><a href="/logout">logout</a></h4>')
+    res.send('<img src="/logo.png">Hello ' + req.session.user + '<h3>messages</h3>' + messages.join('<br>') + '<form action="/msg"><input name="msg" placeholder="new message"><input name="token" type="hidden" value="' + req.session.token + '"><input type="submit"></form>' + '<h4><a href="/logout">logout</a></h4>')
   } else {
     res.send('<form action="/login"><input name="name" placeholder="name"><input name="pwd" placeholder="password"><input type="submit"></form>')
   }
@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
   if (req.query.name == 'cyber' && req.query.pwd == 'sec') {
     req.session.user = req.query.name
+    req.session.token = Math.random()
     res.redirect('/')
   } else {
     res.send('Invalid login')
@@ -30,7 +31,7 @@ app.get('/logout', (req, res) => {
 })
 
 app.get('/msg', (req, res) => {
-  if (req.session.user) {
+  if (req.session.user && req.session.token == req.query.token) {
     messages.push(req.query.msg
       .replace(/&/g, '&amp;')
       .replace(/"/g, '&quot;')
