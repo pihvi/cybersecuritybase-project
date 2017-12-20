@@ -27,7 +27,7 @@ app.get('/login', (req, res) => {
 
 app.get('/logout', (req, res) => {
   delete req.session.user
-  res.redirect(req.query.dest ? req.query.dest : '/')
+  res.redirect('/')
 })
 
 app.get('/msg', (req, res) => {
