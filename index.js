@@ -31,7 +31,11 @@ app.get('/logout', (req, res) => {
 })
 
 app.get('/msg', (req, res) => {
-  messages.push(req.query.msg)
+  messages.push(req.query.msg
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;'))
   res.redirect('/')
 })
 
