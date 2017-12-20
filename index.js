@@ -4,8 +4,7 @@ const app = express()
 const messages = ['hello world']
 
 app.use(session({
-  secret: 'cybersec',
-  cookie: {httpOnly: false}
+  secret: 'cybersec'
 }))
 
 app.get('/', (req, res) => {
