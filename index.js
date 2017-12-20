@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const express = require('express')
 const session = require('express-session')
 const app = express()
@@ -16,7 +17,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-  if (req.query.name == 'cyber' && req.query.pwd == 'sec') {
+  if (req.query.name == 'cyber' && bcrypt.compareSync(req.query.pwd, '$2a$10$CG65if/8MEOk1bxckehMieXKeV0I83IFKWMF6RGekY7gQAS67QOo2')) {
     req.session.user = req.query.name
     req.session.token = Math.random()
     res.redirect('/')
