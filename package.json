@@ -1,9 +1,13 @@
 {
   "scripts": {
-    "start": "npm install && node index.js"
+    "start": "npm install && node index.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
-    "express": "4.4.0",
-    "express-session": "1.15.6"
-  }
+    "express": "4.16.0",
+    "express-session": "1.15.6",
+    "snyk": "^1.85.0"
+  },
+  "snyk": true
 }
